@@ -1,54 +1,72 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const API_URL = "http://193.203.163.244/api"; // Correct backend URL
+    // Use the correct API URL based on environment
+    const API_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000'
+        : 'http://193.203.163.244';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const response = await fetch(`${API_URL}/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        
+        try {
+            const response = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({ username, password }),
+            });
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Registration failed');
+            }
 
-  
+            const data = await response.json();
+            console.log('Registration successful:', data);
+            navigate('/login'); // Redirect to login page after successful registration
+        } catch (error) {
+            console.error('Registration error:', error);
+            setError(error.message || 'Registration failed. Please try again.');
+        }
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h1>Register</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Register</button>
-    </form>
-  );
+    return (
+        <div className="register-container">
+            <form onSubmit={handleSubmit}>
+                <h1>Register</h1>
+                {error && <div className="error-message">{error}</div>}
+                <div className="form-group">
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    );
 };
 
 export default Register;

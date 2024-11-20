@@ -7,28 +7,28 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Middleware
+// Updated CORS configuration
 app.use(cors({
-    origin: "http://193.203.163.244", // Frontend URL
-    methods: "GET,POST,PUT,DELETE",
+    origin: ["http://193.203.163.244", "http://localhost:3000"], // Allow both production and development
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 app.use(bodyParser.json());
 app.use(express.json());
 
 // Database Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.error('MongoDB Connection Error:', err));
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB Connected'))
+    .catch((err) => console.error('MongoDB Connection Error:', err));
 
-// Routes
-app.use('/api/auth', authRoutes); // Ensure auth routes are properly scoped
-
-// Define the Register Route (Example)
-app.post("/api/register", (req, res) => {
+// Updated register route to match frontend URL pattern
+app.post("/register", (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -38,14 +38,13 @@ app.post("/api/register", (req, res) => {
     res.status(201).json({ message: `User ${username} registered successfully` });
 });
 
+// Routes
+app.use('/auth', authRoutes);
 
-
-
-// Define a Test Route
-app.get('/api/test', (req, res) => {
+// Test route
+app.get('/test', (req, res) => {
     res.json({ message: 'Test endpoint works!' });
 });
 
-// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));

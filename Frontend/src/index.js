@@ -9,3 +9,6 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+
+// sudo nano /etc/nginx/sites-available/default

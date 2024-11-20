@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: "http://193.203.163.244", // Allow requests from your frontend
+    origin: "http://193.203.163.244", // Frontend URL
     methods: "GET,POST,PUT,DELETE",
 }));
 app.use(bodyParser.json());
@@ -28,7 +28,7 @@ mongoose
 app.use('/api/auth', authRoutes); // Ensure auth routes are properly scoped
 
 // Define the Register Route (Example)
-app.post("/register", (req, res) => {
+app.post("/api/register", (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required" });

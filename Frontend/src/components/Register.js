@@ -7,7 +7,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const API_URL = "http://193.203.163.244"; // Correct backend URL
+  const API_URL = "http://193.203.163.244/api"; // Correct backend URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ const Register = () => {
         console.error("Error:", error);
     }
 };
+
 
   
 

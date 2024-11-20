@@ -10,6 +10,7 @@ const authRoutes = require('./routes/user');
 const homeRoutes = require('./routes/home');
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
 
 const SECRET_KEY = process.env.SECRET_KEY;
 const MONGO_URI = process.env.MONGO_URI;

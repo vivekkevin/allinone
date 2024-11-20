@@ -3,13 +3,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Updated CORS configuration
+// Middleware
 app.use(cors({
-    origin: ["http://193.203.163.244", "http://localhost:3000"], // Allow both production and development
+    origin: "http://193.203.163.244",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -18,32 +17,22 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.json());
 
-// Database Connection
-mongoose
-    .connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log('MongoDB Connected'))
-    .catch((err) => console.error('MongoDB Connection Error:', err));
+// Test route
+app.get('/test', (req, res) => {
+    res.json({ message: 'Backend is working!' });
+});
 
-// Updated register route to match frontend URL pattern
-app.post("/register", (req, res) => {
+// Register route
+app.post('/register', (req, res) => {
     const { username, password } = req.body;
-
+    console.log('Received registration request:', { username });
+    
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required" });
     }
 
+    // Your registration logic here
     res.status(201).json({ message: `User ${username} registered successfully` });
-});
-
-// Routes
-app.use('/auth', authRoutes);
-
-// Test route
-app.get('/test', (req, res) => {
-    res.json({ message: 'Test endpoint works!' });
 });
 
 const PORT = process.env.PORT || 5000;

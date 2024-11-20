@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
             to: user.email,
             subject: 'Activate Your Account',
             html: `<p>Thank you for registering, ${user.fullName}. Please activate your account by clicking the link below:</p>
-                   <button><a href="https://klippefort.online:${process.env.PORT}/user/activate/${user._id}">Activate Account</a></button>`,
+                   <button><a href="http://localhost:${process.env.PORT}/user/activate/${user._id}">Activate Account</a></button>`,
         };
 
         await transport.sendMail(mailOptions);

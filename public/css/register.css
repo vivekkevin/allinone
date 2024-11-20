@@ -3,22 +3,60 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom right, #f3f4f6, #eaecef);
+    background-color: #f3f4f6;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    flex-direction: column;
     color: #333;
+    min-height: 100vh;
 }
 
-/* Container Styles */
-.container {
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo img {
+    height: 40px;
+}
+
+.header .login-link a {
+    font-size: 16px;
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .login-link a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container {
     background-color: #fff;
     width: 450px;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     text-align: left;
+    margin-right: 20px;
+}
+
+.image-container img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Header Styles */

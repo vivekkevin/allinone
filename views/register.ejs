@@ -7,57 +7,70 @@
     <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Let’s Get You Started</h1>
-            <p>Fill in the details below to create your account.</p>
-        </header>
-        <form action="/register" method="POST" id="registerForm">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            </div>
+    <div class="header">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Logo">
+        </div>
+        <div class="login-link">
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-container">
+            <header>
+                <h1>Let’s Get You Started</h1>
+                <p>Fill in the details below to create your account.</p>
+            </header>
+            <form action="/register" method="POST" id="registerForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
 
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" placeholder="Enter your phone number (optional)">
-            </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number (optional)">
+                </div>
 
-            <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-            </div>
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
 
-            <div class="form-group">
-                <label for="company">Company Name</label>
-                <input type="text" id="company" name="company" placeholder="Enter your company name" required>
-            </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company name" required>
+                </div>
 
-            <div class="form-group">
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" placeholder="Enter your country" required>
-            </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" placeholder="Enter your country" required>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" placeholder="Tell us a bit about yourself" rows="3"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Tell us a bit about yourself" rows="3"></textarea>
+                </div>
 
-            <button type="submit" class="btn">Create Account</button>
-        </form>
-        <footer>
-            <p>Already have an account? <a href="/login">Log in here</a>.</p>
-        </footer>
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+            <footer>
+                <p>Already have an account? <a href="/login">Log in here</a>.</p>
+            </footer>
+        </div>
+        <div class="image-container">
+            <img src="/images/background.jpg" alt="Background">
+        </div>
     </div>
 </body>
 </html>

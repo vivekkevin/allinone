@@ -7,62 +7,68 @@ const router = express.Router();
 
 // Registration Route
 router.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const { fullName, email, password, contactNumber } = req.body;
 
-    const user = new User({
-        username,
-        email,
-        password: hashedPassword,
-    });
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 12);
 
-    await user.save();
+        // Save user to the database
+        const user = new User({
+            fullName,
+            email,
+            password: hashedPassword,
+            contactNumber,
+            status: 'Pending', // Default status
+        });
 
-    // Send email to admin
-    const transport = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.ADMIN_EMAIL,
-            pass: process.env.ADMIN_PASSWORD,
-        },
-    });
+        await user.save();
 
-    const mailOptions = {
-        from: process.env.ADMIN_EMAIL,
-        to: process.env.ADMIN_EMAIL,
-        subject: 'New User Registration Request',
-        html: `<p>A new user has registered with the following details:</p>
-               <p>Username: ${username}</p>
-               <p>Email: ${email}</p>
-               <button><a href="https://klippefort.online:${process.env.PORT}/admin/approve/${user._id}">Approve Registration</a></button>`,
-    };
+        // Send activation email
+        const transport = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.ADMIN_EMAIL,
+                pass: process.env.ADMIN_PASSWORD,
+            },
+        });
 
-    await transport.sendMail(mailOptions);
+        const mailOptions = {
+            from: process.env.ADMIN_EMAIL,
+            to: user.email,
+            subject: 'Activate Your Account',
+            html: `<p>Thank you for registering, ${user.fullName}. Please activate your account by clicking the link below:</p>
+                   <button><a href="https://klippefort.online:${process.env.PORT}/user/activate/${user._id}">Activate Account</a></button>`,
+        };
 
-    res.send('Registration complete. Await admin approval.');
+        await transport.sendMail(mailOptions);
+
+        res.status(200).send('Registration successful! Please check your email for the activation link.');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error during registration. Please try again later.');
+    }
 });
 
-// Login Route
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+// Activation Route
+router.get('/user/activate/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user || user.status !== 'Pending') {
+            return res.status(404).send('Activation not allowed or already activated.');
+        }
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).send('Invalid credentials');
+        // Update user status and set activation and expiry dates
+        user.status = 'Activated';
+        user.activationDate = new Date();
+        user.expiryDate = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000); // 15 days from now
+        await user.save();
+
+        res.status(200).send('Account activated successfully! You can now log in.');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error during account activation. Please try again later.');
     }
-
-    if (user.status !== 'Activated') {
-        return res.status(403).send('Account not activated');
-    }
-
-    const now = new Date();
-    if (now > user.expiryDate) {
-        return res.status(403).send('Account expired. Please contact the administrator.');
-    }
-
-    req.session.isLoggedIn = true;
-    req.session.user = user;
-    res.redirect('/');
 });
 
 module.exports = router;

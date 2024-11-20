@@ -5,6 +5,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const SECRET_KEY = process.env.SECRET_KEY;
 // Routes
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
@@ -38,6 +39,6 @@ app.use(authRoutes);
 app.use(adminRoutes);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on https://klippefort.online:${PORT}`);
 });

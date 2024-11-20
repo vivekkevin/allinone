@@ -30,14 +30,12 @@ app.use('/api/auth', authRoutes); // Ensure auth routes are properly scoped
 // Define the Register Route (Example)
 app.post("/api/register", (req, res) => {
     const { username, password } = req.body;
-
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required" });
     }
-
-    // Add logic to save user to the database
     res.status(201).json({ message: `User ${username} registered successfully` });
 });
+
 
 
 // Define a Test Route

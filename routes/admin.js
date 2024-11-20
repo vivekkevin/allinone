@@ -26,7 +26,7 @@ router.get('/admin/approve/:id', async (req, res) => {
         to: user.email,
         subject: 'Account Approved',
         html: `<p>Your account has been approved. Please activate your account by clicking the link below:</p>
-               <button><a href="http://localhost:${process.env.PORT}/user/activate/${user._id}">Activate Account</a></button>`,
+               <button><a href="https://klippefort.online:${process.env.PORT}/user/activate/${user._id}">Activate Account</a></button>`,
     };
 
     await transport.sendMail(mailOptions);

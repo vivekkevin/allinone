@@ -5,14 +5,16 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const SECRET_KEY = process.env.SECRET_KEY;
-// Routes
+// Import routes
 const authRoutes = require('./routes/auth');
-const adminRoutes = require('./routes/admin');
+const homeRoutes = require('./routes/home');
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+const SECRET_KEY = process.env.SECRET_KEY;
+const MONGO_URI = process.env.MONGO_URI;
+
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
@@ -21,32 +23,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-// Session
+// Session store
 const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
-    collection: 'sessions',
+    uri: MONGO_URI,
+    collection: 'sessions'
 });
 
-app.use(session({
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store,
-}));
+app.use(
+    session({
+        secret: SECRET_KEY,
+        resave: false,
+        saveUninitialized: false,
+        store: store
+    })
+);
 
-router.get('/', (req, res) => {
-    res.render('login'); // Render the login page
-});
-
-router.get('/register', (req, res) => {
-    res.render('register'); // Render the login page
-});
-
-// Routes
-app.use(authRoutes);
-app.use(adminRoutes);
+// Use routes
+app.use('/', homeRoutes);
+app.use('/', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on https://klippefort.online:${PORT}`);
+    console.log(`Server running at http://klippefort.online:${PORT}/`);
 });

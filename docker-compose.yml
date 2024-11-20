@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./Backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://vivekkevin1995:dev@techklippe.359is.mongodb.net/userAuthApp
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "80:80"

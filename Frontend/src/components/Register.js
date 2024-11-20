@@ -7,25 +7,26 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const API_URL = "http://193.203.163.244:5000";
+  const API_URL = "http://193.203.163.244/api"; // Correct backend URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/register`, {
-        username,
-        password,
-      });
-      if (response.data.message) {
-        console.log(response.data.message);
-        alert("Registration successful!");
-        navigate("/"); // Redirect to login page after successful registration
-      }
+        const response = await fetch(`${API_URL}/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await response.json();
+        console.log(data);
     } catch (error) {
-      console.error("Error during registration:", error);
-      alert("Registration failed. Please try again.");
+        console.error("Error:", error);
     }
-  };
+};
+
+  
 
   return (
     <form onSubmit={handleSubmit}>

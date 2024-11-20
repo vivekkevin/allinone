@@ -31,14 +31,14 @@ app.use('/api/auth', authRoutes); // Ensure auth routes are properly scoped
 app.post("/api/register", (req, res) => {
     const { username, password } = req.body;
 
-    // Replace this with actual user creation logic
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required" });
     }
 
-    // Example response
+    // Add logic to save user to the database
     res.status(201).json({ message: `User ${username} registered successfully` });
 });
+
 
 // Define a Test Route
 app.get('/api/test', (req, res) => {

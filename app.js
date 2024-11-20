@@ -34,6 +34,14 @@ app.use(session({
     store,
 }));
 
+router.get('/', (req, res) => {
+    res.render('login'); // Render the login page
+});
+
+router.get('/register', (req, res) => {
+    res.render('register'); // Render the login page
+});
+
 // Routes
 app.use(authRoutes);
 app.use(adminRoutes);

@@ -24,19 +24,27 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.error('MongoDB Connection Error:', err));
 
-
 // Routes
-app.use('/', authRoutes);
+app.use('/api/auth', authRoutes); // Ensure auth routes are properly scoped
 
-// Define additional routes
-app.post("/register", (req, res) => {
-    res.json({ message: "User registered successfully" });
+// Define the Register Route (Example)
+app.post("/api/register", (req, res) => {
+    const { username, password } = req.body;
+
+    // Replace this with actual user creation logic
+    if (!username || !password) {
+        return res.status(400).json({ error: "Username and password are required" });
+    }
+
+    // Example response
+    res.status(201).json({ message: `User ${username} registered successfully` });
 });
 
+// Define a Test Route
 app.get('/api/test', (req, res) => {
     res.json({ message: 'Test endpoint works!' });
 });
 
 // Start the server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

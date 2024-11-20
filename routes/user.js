@@ -15,6 +15,12 @@ router.post('/register', async (req, res) => {
     const { username, password, phone, fullname, email, company, country, description } = req.body;
 
     try {
+        // Check if the username or email already exists
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+        if (existingUser) {
+            return res.status(400).send('Username or Email already exists.');
+        }
+
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -49,18 +55,18 @@ router.post('/login', async (req, res) => {
         // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
-            return res.redirect('/login');
+            return res.status(400).send('Invalid username or password.');
         }
 
         // Check if password is correct
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.redirect('/login');
+            return res.status(400).send('Invalid username or password.');
         }
 
         // Set session and redirect to home page
         req.session.isLoggedIn = true;
-        req.session.user = user;
+        req.session.user = { id: user._id, username: user.username };
         res.redirect('/');
     } catch (err) {
         console.error('Error during login:', err);
@@ -75,6 +81,7 @@ router.post('/logout', (req, res) => {
             console.error('Error during logout:', err);
             return res.status(500).send('Logout failed. Please try again later.');
         }
+        res.clearCookie('connect.sid'); // Clear the session cookie
         res.redirect('/login');
     });
 });

@@ -29,34 +29,29 @@ body {
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
-    background: linear-gradient(to right, #F78DCD, #E9B1C8, #FDDEB5); /* Three-color gradient */
-    -webkit-background-clip: text; /* Ensures gradient applies only to text */
-    -webkit-text-fill-color: transparent; /* Makes background gradient visible */
+    background: linear-gradient(to right, #F78DCD, #E9B1C8, #FDDEB5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     transition: all 0.3s ease;
 }
 
 .header .login-link a:hover {
     text-decoration: underline;
-    filter: brightness(1.2); /* Optional: adds a subtle brightness on hover */
-}
-
-
-.header .login-link a:hover {
-    text-decoration: underline;
+    filter: brightness(1.2);
 }
 
 .content {
     display: flex;
     align-items: center;
     justify-content: left;
-    padding: 10px;
+    padding: 20px;
     margin-left: 5%;
 }
 
 .form-container {
     background: rgba(255, 255, 255, 0.1);
-    width: 600px;
-    padding: 40px;
+    width: 400px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(14px);
@@ -65,25 +60,21 @@ body {
 
 /* Header Styles */
 header h1 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     color: #4a4a4a;
+    text-align: center;
 }
 
 header p {
-    font-size: 16px;
+    font-size: 14px;
     color: #7a7a7a;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Form Grid Styles */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
-}
-
+/* Form Styles */
 .form-group {
     margin-bottom: 20px;
 }
@@ -96,27 +87,21 @@ label {
     display: block;
 }
 
-input,
-textarea {
-    width: 85%;
-    padding: 10px 15px;
+input {
+    width: 95%;
+    padding: 12px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 10px;
+    font-size: 14px;
     color: #333;
     outline: none;
     background: #f9f9f9;
 }
 
-input:focus,
-textarea:focus {
+input:focus {
     border-color: #6a11cb;
     background: #fff;
     box-shadow: 0 0 3px rgba(106, 17, 203, 0.4);
-}
-
-textarea {
-    resize: none;
 }
 
 /* Button Styles */
@@ -131,7 +116,6 @@ textarea {
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
-    grid-column: span 2; /* Make button span both columns */
 }
 
 .btn:hover {
@@ -159,65 +143,48 @@ footer a:hover {
 
 /* Tablet Screens */
 @media (max-width: 1024px) {
-    .content {
-        margin-left: 2%;
-    }
-
-    .form-container {
-        width: 85%;
-        padding: 30px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr 1fr; /* Two columns */
-    }
-
-    input,
-    textarea {
-        width: 85%; /* Full width for inputs */
-    }
-
-    .btn {
-        grid-column: span 2; /* Span both columns */
-    }
-}
-
-/* Mobile Screens */
-@media (max-width: 768px) {
-    .content {
-        margin: 0 auto;
-        justify-content: center;
-    }
-
     .form-container {
         width: 85%;
         padding: 20px;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr; /* Single column */
-        gap: 15px;
-    }
-
     header h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     header p {
         font-size: 14px;
     }
 
-    input,
-    textarea {
-        width: 85%; /* Full width for inputs */
+    input {
         font-size: 12px;
     }
 
     .btn {
-        grid-column: span 1; /* Single column layout */
+        font-size: 16px;
     }
 }
-datalist {
-    max-height: 150px;
-    overflow-y: auto;
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    input {
+        font-size: 12px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
 }

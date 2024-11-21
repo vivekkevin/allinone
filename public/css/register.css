@@ -3,7 +3,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f3f4f6;
+    background: url('../img/desktop-background.png') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     color: #333;
@@ -15,8 +16,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .header .logo img {
@@ -36,27 +38,20 @@ body {
 
 .content {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    justify-content: left;
+    padding: 10px;
+    margin-left: 5%;
 }
 
 .form-container {
-    background-color: #fff;
-    width: 450px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 600px;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14px);
     text-align: left;
-    margin-right: 20px;
-}
-
-.image-container img {
-    max-width: 500px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Header Styles */
@@ -73,7 +68,13 @@ header p {
     margin-bottom: 20px;
 }
 
-/* Form Styles */
+/* Form Grid Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -88,11 +89,11 @@ label {
 
 input,
 textarea {
-    width: 100%;
+    width: 85%;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 12px;
     color: #333;
     outline: none;
     background: #f9f9f9;
@@ -121,6 +122,7 @@ textarea {
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
+    grid-column: span 2; /* Make button span both columns */
 }
 
 .btn:hover {
@@ -142,4 +144,67 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* Responsive Design */
+
+/* Tablet Screens */
+@media (max-width: 1024px) {
+    .content {
+        margin-left: 2%;
+    }
+
+    .form-container {
+        width: 85%;
+        padding: 30px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns */
+    }
+
+    input,
+    textarea {
+        width: 85%; /* Full width for inputs */
+    }
+
+    .btn {
+        grid-column: span 2; /* Span both columns */
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+    .content {
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .form-container {
+        width: 85%;
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    input,
+    textarea {
+        width: 85%; /* Full width for inputs */
+        font-size: 12px;
+    }
+
+    .btn {
+        grid-column: span 1; /* Single column layout */
+    }
 }

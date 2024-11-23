@@ -4,52 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/login.css"> <!-- Link to the login CSS -->
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Header Section -->
     <div class="header">
         <div class="logo">
-            <img src="../img/logo.png" alt="Logo">
+            <img src="img/logo.png" alt="Logo">
         </div>
-        <div class="login-link">
-            <a href="/register">Register</a>
+        <div class="menu">
+            <div class="hamburger" id="hamburger">&#9776;</div>
+            <div class="menu-dropdown" id="menu-dropdown">
+                <a href="/pricing" class="menu-item">Pricing</a>
+                <a href="/about" class="menu-item">About</a>
+                <a href="/contact" class="menu-item">Contact</a>
+                <a href="/register" class="menu-item">Register</a>
+            </div>
         </div>
     </div>
+
+    <!-- Main Content -->
     <div class="content">
+        <!-- Welcome Section -->
+        <div class="welcome">
+            <h1 id="animatedTitle">All in One Platform Service</h1>
+            <h2 id="animatedText" style="display: none;">Welcome to the platform - Klippefort Digital Solutions</h2>
+            <p id="subText" style="display: none;">
+                We are available for the service: Track the project, connect with expertise, cost benefits, collaboration, no third-party charges, etc.
+            </p>
+            <button id="ctaButton" style="display: none;">Explore Our Services</button>
+        </div>
+
+        <!-- Login Form -->
         <div class="form-container">
             <header>
-                <h1>Login</h1>
                 <% if (step === 1) { %>
+                    <h1>Login</h1>
                     <p>Please enter your username and password to log in.</p>
+                    <form action="/login" method="POST" class="login-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Login</button>
+                        </div>
+                    </form>
                 <% } else if (step === 2) { %>
-                    <p>A validation code has been sent to your email. Please enter it below to continue.</p>
+                    <h1>Validate OTP</h1>
+                    <p>An OTP has been sent to your email. Please enter it below to complete your login.</p>
+                    <form action="/validate-code" method="POST" class="otp-form">
+                        <div class="form-group">
+                            <label for="otp">OTP Code</label>
+                            <input type="text" id="otp" name="code" placeholder="Enter OTP" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Validate</button>
+                        </div>
+                    </form>
                 <% } %>
             </header>
+        </div>
+        
+    </div>
 
-            <% if (step === 1) { %>
-                <!-- Step 1: Username and Password -->
-                <form action="/login" method="POST">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn">Login</button>
-                </form>
-            <% } else if (step === 2) { %>
-                <!-- Step 2: Validation Code -->
-                <form action="/validate-code" method="POST">
-                    <div class="form-group">
-                        <label for="code">Validation Code</label>
-                        <input type="text" id="code" name="code" placeholder="Enter Validation Code" required>
-                    </div>
-                    <button type="submit" class="btn">Validate</button>
-                </form>
-            <% } %>
+    <!-- Footer Section -->
+    <div class="footer">
+        <div class="footer-left">
+            <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-right">
+            <a href="/privacy-policy">Privacy Policy</a> |
+            <a href="/terms">Terms of Service</a>
         </div>
     </div>
+
+    <!-- Chat Popup -->
+    <div id="chat-popup" class="chat-popup" style="display:none;">
+        <div class="chat-header">
+            <h4>Customer Support</h4>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+        <div id="user-info">
+            <form id="user-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required />
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                <label for="platform">Platform:</label>
+                <select id="platform" name="platform" required>
+                    <option value="">Select a Platform</option>
+                    <option value="Web">Web</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Desktop">Desktop</option>
+                </select>
+                <button type="submit">Start Chat</button>
+            </form>
+        </div>
+        <div id="chat-messages" class="chat-messages" style="display:none;"></div>
+        <form id="chat-form" style="display:none;">
+            <input type="text" id="chat-input" placeholder="Type your message..." required />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <button id="chat-button" class="chat-button">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/login.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", () => {
+            const chatButton = document.getElementById("chat-button");
+            const chatPopup = document.getElementById("chat-popup");
+            const closeChat = document.getElementById("close-chat");
+            const userForm = document.getElementById("user-form");
+            const chatMessages = document.getElementById("chat-messages");
+            const chatForm = document.getElementById("chat-form");
+            const chatInput = document.getElementById("chat-input");
+
+            let userName, userEmail, userPlatform;
+
+            // Toggle chat popup visibility
+            chatButton.addEventListener("click", () => {
+                chatPopup.style.display = "block";
+            });
+
+            closeChat.addEventListener("click", () => {
+                chatPopup.style.display = "none";
+            });
+
+            // Handle user form submission
+            userForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                userName = document.getElementById("name").value;
+                userEmail = document.getElementById("email").value;
+                userPlatform = document.getElementById("platform").value;
+
+                try {
+                    const response = await fetch("/start-chat", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name: userName, email: userEmail, platform: userPlatform }),
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        alert("Chat started successfully!");
+                        userForm.style.display = "none";
+                        chatMessages.style.display = "block";
+                        chatForm.style.display = "block";
+                        fetchMessages(); // Immediately load messages after chat starts
+                        startAutoRefresh(); // Start auto-refresh
+                    } else {
+                        alert("Failed to start chat: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error starting chat:", error);
+                    alert("An error occurred while starting the chat.");
+                }
+            });
+
+            // Function to fetch chat messages
+            const fetchMessages = async () => {
+                try {
+                    const response = await fetch(`/support-fetch?email=${userEmail}`);
+                    const result = await response.json();
+                    chatMessages.innerHTML = ""; // Clear old messages
+                    if (result.success) {
+                        result.messages.forEach((msg) => {
+                            const msgEl = document.createElement("div");
+                            msgEl.textContent = `${msg.sender}: ${msg.message}`;
+                            chatMessages.appendChild(msgEl);
+                        });
+                    } else {
+                        console.error("Failed to fetch messages: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error fetching messages:", error);
+                }
+            };
+
+            // Handle chat form submission
+            chatForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const message = chatInput.value;
+                chatInput.value = "";
+
+                try {
+                    const response = await fetch("/send-chat-message", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, message }),
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        fetchMessages(); // Immediately refresh messages after sending
+                    } else {
+                        alert("Failed to send message: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error sending message:", error);
+                }
+            });
+
+            // Auto-refresh functionality
+            let refreshInterval;
+            const startAutoRefresh = () => {
+                refreshInterval = setInterval(fetchMessages, 5000); // Refresh every 5 seconds
+            };
+
+            const stopAutoRefresh = () => {
+                clearInterval(refreshInterval); // Stop refreshing when needed
+            };
+
+            // Cleanup auto-refresh on popup close
+            closeChat.addEventListener("click", stopAutoRefresh);
+        });
+    </script>
 </body>
 </html>

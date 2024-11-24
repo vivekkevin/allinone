@@ -130,7 +130,7 @@ router.post('/register', async (req, res) => {
 
         // Notify admin for approval
         const adminEmail = 'vivekkevin1995@gmail.com'; // Admin email
-        const approvalLink = `http://localhost:3000/approve-user/${user._id}`;
+        const approvalLink = `https://klippefort.online/approve-user/${user._id}`;
         await transporter.sendMail({
             from: 'info@klippefort.com',
             to: adminEmail,
@@ -169,7 +169,7 @@ router.get('/approve-user/:id', async (req, res) => {
         await user.save();
 
         // Notify the user about approval
-        const loginLink = `http://localhost:3000/login`;
+        const loginLink = `https://klippefort.online/login`;
         await transporter.sendMail({
             from: 'info@klippefort.com',
             to: user.email,

@@ -1,0 +1,156 @@
+/* Reset margins and paddings for consistent cross-browser rendering */
+body {
+    font-family: Arial, sans-serif;
+    background: url('/img/desktop-background_R.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Header styles */
+header {
+    background: linear-gradient(to right, rgba(7, 154, 154, 0.4), rgba(114, 2, 2, 0.2));
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    z-index: 1000; /* Ensures the header is above other content */
+}
+
+header img.logo {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 50px;
+}
+
+.back-button {
+    display: flex;  /* Using flexbox for centering content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 40px; /* Fixed width */
+    height: 40px; /* Equal height to make it a circle */
+    color: #fff;
+    background: rgba(148, 46, 225, 0.8); /* Matching the nav background */
+    text-decoration: none;
+    border-radius: 50%; /* Makes the button circular */
+    border: none; /* Remove any border if present */
+    cursor: pointer; /* Indicates the element is clickable */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-bottom: 10px; /* Space before the menu starts */
+}
+
+.back-button:hover {
+    background: rgb(253, 213, 172); /* Slightly darker on hover */
+    color: #333; /* Optional: change text color on hover for better contrast */
+}
+
+
+
+
+/* Main content styles */
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 200px auto; /* Increased top margin to account for fixed header */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #fff;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    position: relative; /* Ensures it's above the fixed header */
+}
+
+/* Navigation styles */
+nav {
+    width: 200px;
+    background: linear-gradient(to left, rgba(89, 7, 154, 0.8), rgba(49, 2, 114, 0.8));
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+    transform: translateX(0); /* Visible on large screens */
+    z-index: 1001; /* Lower than header but above other content */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Hamburger menu styles */
+#hamburger {
+    display: none; /* Hidden on large screens */
+    cursor: pointer;
+    font-size: 30px;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: white;
+    z-index: 2000;
+}
+
+#closeMenu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1001; /* Ensure it's above other elements within nav */
+}
+
+nav#sideNav.expanded #closeMenu {
+    display: block; /* Show close button when nav is expanded */
+}
+
+
+@media (max-width: 768px) {
+    #hamburger {
+        display: block; /* Show hamburger menu on smaller screens */
+    }
+
+    nav {
+        transform: translateX(-100%); /* Hide navigation off-screen */
+    }
+
+    nav.expanded {
+        transform: translateX(0); /* Show navigation when expanded */
+    }
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: white;
+}

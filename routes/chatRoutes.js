@@ -83,48 +83,75 @@ router.post("/verify-otp", (req, res) => {
 
 // Route to render the chat dashboard
 router.get("/chat-dashboard", checkAuth, async (req, res) => {
-  try {
-    const chats = await Chat.find(); // Fetch all chats from the database
-    res.render("chat-dashboard", { title: "Admin Chat Interface", chats });
-  } catch (error) {
-    console.error("Error fetching chats:", error);
-    res.status(500).send("Error fetching chat data.");
-  }
+    try {
+        // Fetch all chats and sort by most recent
+        const chatCollection = await Chat.find()
+            .sort({ updatedAt: -1 })
+            .lean();
+
+        // Format the chats for the dashboard
+        const formattedChats = chatCollection.map(chat => ({
+            id: chat._id.toString(),
+            name: sanitizeInput(chat.name),
+            email: sanitizeInput(chat.email),
+            platform: sanitizeInput(chat.platform || 'WhatsApp'),
+            messages: chat.messages.map(msg => ({
+                sender: sanitizeInput(msg.sender),
+                message: sanitizeInput(msg.message),
+                timestamp: msg.timestamp
+            }))
+        }));
+
+        // Render the dashboard with the formatted chat collection
+        res.render("chat-dashboard", { 
+            title: "Admin Chat Interface", 
+            chatCollection: formattedChats 
+        });
+
+    } catch (error) {
+        console.error("Error fetching chats:", error);
+        res.render("chat-dashboard", { 
+            title: "Admin Chat Interface", 
+            chatCollection: [],
+            error: "Error fetching chat data."
+        });
+    }
 });
+
 
 // Route to handle replies to a specific chat
 router.post("/chat/reply", async (req, res) => {
-  const { email, replyMessage } = req.body;
+    const { email, replyMessage } = req.body;
 
-  try {
-    const sanitizedReply = sanitizeInput(replyMessage);
-    const chat = await Chat.findOne({ email });
+    try {
+        const sanitizedReply = sanitizeInput(replyMessage);
+        const chat = await Chat.findOne({ email });
 
-    if (!chat) {
-      return res.status(404).send("No chat found for this email.");
+        if (!chat) {
+            return res.status(404).send("No chat found for this email.");
+        }
+
+        // Send the reply via email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: "Support Response",
+            text: sanitizedReply,
+        });
+
+        // Save the reply to the chat
+        chat.messages.push({
+            sender: "support",
+            message: sanitizedReply,
+            timestamp: new Date(),
+        });
+        await chat.save();
+
+        res.redirect("/chat-dashboard");
+    } catch (error) {
+        console.error("Error sending reply:", error);
+        res.status(500).send("Error sending reply.");
     }
-
-    // Send the reply via email
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Support Response",
-      text: sanitizedReply,
-    });
-
-    // Save the reply to the chat
-    chat.messages.push({
-      sender: "support",
-      message: sanitizedReply,
-      timestamp: new Date(),
-    });
-    await chat.save();
-
-    res.redirect("/chat-dashboard");
-  } catch (error) {
-    console.error("Error sending reply:", error);
-    res.status(500).send("Error sending reply.");
-  }
 });
 
 // Route to start a chat session

@@ -78,7 +78,7 @@ body {
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.8);
     width: 400px;
     padding: 20px;
     border-radius: 12px;
@@ -227,6 +227,15 @@ input:focus {
     font-family: 'Arial', sans-serif;
 }
 
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
 .welcome h1 {
     margin: 10px 0;
     font-size: 2.5em;
@@ -235,9 +244,21 @@ input:focus {
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hides text overflow */
     border-right: 3px solid black; /* Typing cursor effect */
+    width: 0; /* Start with no width to enable typing effect */
     display: inline-block;
-    animation: typing 4s steps(40, end), blink 0.6s step-end infinite alternate;
+    animation: typing 4s steps(40, end) forwards, blink 0.6s step-end infinite alternate;
 }
+
+/* Add this to ensure the cursor disappears at the end */
+@keyframes hideCursor {
+    0%, 90% { border-right-color: black; } /* Cursor visible during typing */
+    100% { border-right-color: transparent; } /* Cursor disappears at the end */
+}
+
+.welcome h1 {
+    animation: typing 4s steps(40, end) forwards, blink 0.6s step-end 8, hideCursor 4.6s forwards; /* Updated to hide cursor at end */
+}
+
 
 .welcome h2 {
     margin: 20px 0 10px;
@@ -260,7 +281,7 @@ input:focus {
     margin-left: 10px;
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #350760;
+    background-color: #450680;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -287,7 +308,7 @@ input:focus {
 /* Blinking cursor keyframes */
 @keyframes blink {
     from {
-        border-right-color: black;
+        border-right-color: rgb(67, 0, 167);
     }
     to {
         border-right-color: transparent;

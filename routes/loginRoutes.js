@@ -130,7 +130,7 @@ router.post('/register', async (req, res) => {
 
         // Notify admin for approval
         const adminEmail = 'vivekkevin1995@gmail.com'; // Admin email
-        const approvalLink = `https://klippefort.online/approve-user/${user._id}`;
+        const approvalLink = `http://localhost:3000/approve-user/${user._id}`;
         await transporter.sendMail({
             from: 'info@klippefort.com',
             to: adminEmail,
@@ -169,7 +169,7 @@ router.get('/approve-user/:id', async (req, res) => {
         await user.save();
 
         // Notify the user about approval
-        const loginLink = `https://klippefort.online/login`;
+        const loginLink = `http://localhost:3000/login`;
         await transporter.sendMail({
             from: 'info@klippefort.com',
             to: user.email,
@@ -197,6 +197,33 @@ router.post('/logout', (req, res) => {
         res.clearCookie('connect.sid'); // Clear the session cookie
         res.redirect('/login');
     });
+});
+
+router.get('/privacy-policy', (req, res) => {
+    res.render('policy/privacy-policy', {
+        companyName: 'Your Company Name',
+        websiteURL: 'https://www.example.com',
+    });
+});
+
+router.get('/terms-conditions', (req, res) => {
+    res.render('policy/terms-conditions');
+});
+
+router.get('/return-policy', (req, res) => {
+    res.render('policy/return-refund-policy');
+});
+
+router.get('/eula', (req, res) => {
+    res.render('policy/eula');
+});
+
+router.get('/disclaimer', (req, res) => {
+    res.render('policy/disclaimer');
+});
+
+router.get('/cookies-policy', (req, res) => {
+    res.render('policy/cookies-policy');
 });
 
 module.exports = router;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies Policy | OASIS</title>
+    <link rel="stylesheet" href="/css/privacy-policy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+    
+    <header>
+        <div id="hamburger">☰</div>
+        <h1>Cookies Policy</h1>
+        <img src="/img/Favi.png" alt="Company Logo" class="logo">
+    </header>
+    <%- include('../components/policy/sidenav') %>
+    <main>
+        <article>
+            <section>
+                <p>This Cookies Policy explains how we, Klippefort-Digital, use cookies and similar technologies to recognize you when you visit our website at <a href="https://klippefort.online" style="color: rgb(255, 201, 115);  text-decoration: none;">Klippefort</a>
+                    . It explains what these technologies are and why we use them, as well as your rights to control our use of them.</p>
+            </section>
+            <section>
+                <h2>1. What are Cookies?</h2>
+                <p>Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as to provide reporting information.</p>
+            </section>
+            <section>
+                <h2>2. How We Use Cookies</h2>
+                <p>We use cookies to enhance user experience, analyze traffic, and improve and personalize our advertising. Cookies help us understand how our website is being used, how effective our marketing campaigns are, and help customize our website for you.</p>
+            </section>
+            <section>
+                <h2>3. Types of Cookies We Use</h2>
+                <ul>
+                    <li><strong>Session Cookies.</strong> These cookies are temporary and expire once you close your browser (or once your session ends).</li>
+                    <li><strong>Persistent Cookies.</strong> These cookies remain on your device until they expire or you delete them. They enable certain information to be retained by your device, such as your preferences or login status.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>4. Your Choices Regarding Cookies</h2>
+                <p>If you prefer to avoid the use of cookies on the website, first you must disable the use of cookies in your browser and then delete the cookies saved in your browser associated with this website. You may use this option for preventing the use of cookies at any time.</p>
+            </section>
+            <section>
+                <h2>5. More Information About Cookies</h2>
+                <p>You can learn more about cookies by visiting <a href="https://www.allaboutcookies.org" target="_blank">allaboutcookies.org</a>.</p>
+            </section>
+        </article>
+    </main>
+    <%- include('../components/policy/footer') %>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var sideNav = document.getElementById('sideNav');
+    document.getElementById('hamburger').addEventListener('click', function() {
+        sideNav.classList.add('expanded');
+    });
+
+    document.getElementById('closeMenu').addEventListener('click', function() {
+        sideNav.classList.remove('expanded');
+    });
+});
+    </script>
+    
+</html>

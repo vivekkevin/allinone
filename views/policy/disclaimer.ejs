@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer | OASIS</title>
+    <link rel="stylesheet" href="/css/privacy-policy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="hamburger">☰</div>
+        <h1>Disclaimer</h1>
+        <img src="/img/Favi.png" alt="Company Logo" class="logo">
+    </header>
+    <%- include('../components/policy/sidenav') %>
+    <main>
+        <section>
+            <p>The information provided on this website is for general informational purposes only. All information on the site is provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the site.</p>
+        </section>
+
+        <section>
+            <h2>1. No Guarantees</h2>
+            <p>We make no guarantees, representations, or warranties about the accuracy or completeness of the content on this website or the content of any sites linked to this site and assume no liability or responsibility for any:</p>
+            <ul>
+                <li>Errors, mistakes, or inaccuracies of content.</li>
+                <li>Personal injury or property damage, of any nature whatsoever, resulting from your access to and use of our website.</li>
+                <li>Any unauthorized access to or use of our secure servers and/or any and all personal information stored therein.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Professional Advice Disclaimer</h2>
+            <p>The site cannot and does not contain specific advice. The information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. The use or reliance of any information contained on this site is solely at your own risk.</p>
+        </section>
+
+        <section>
+            <h2>3. External Links Disclaimer</h2>
+            <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties or links to websites and features in banners or other advertising. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability or completeness by us.</p>
+        </section>
+
+        <section>
+            <h2>4. Errors and Omissions Disclaimer</h2>
+            <p>The information given by the Site is for general guidance on matters of interest only. Even if we take every precaution to ensure that the content of the Site is both current and accurate, errors can occur. Plus, given the changing nature of laws, rules, and regulations, there may be delays, omissions, or inaccuracies in the information contained on the Site.</p>
+        </section>
+
+        <section>
+            <h2>5. Fair Use Disclaimer</h2>
+            <p>We may use copyrighted material which has not always been specifically authorized by the copyright owner. We make such material available in our efforts to advance understanding of environmental, political, human rights, economic, democracy, scientific, and social justice issues, etc. We believe this constitutes a 'fair use' of any such copyrighted material as provided for in section 107 of the US Copyright Act.</p>
+        </section>
+
+        <section>
+            <h2>6. Views Expressed Disclaimer</h2>
+            <p>The views and opinions expressed in the articles are those of the authors and do not necessarily reflect the official policy or position of any other agency, organization, employer, or company.</p>
+        </section>
+    </main>
+
+        <%- include('../components/policy/footer') %>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var sideNav = document.getElementById('sideNav');
+        document.getElementById('hamburger').addEventListener('click', function() {
+            sideNav.classList.add('expanded');
+        });
+    
+        document.getElementById('closeMenu').addEventListener('click', function() {
+            sideNav.classList.remove('expanded');
+        });
+    });
+        </script>
+</html>

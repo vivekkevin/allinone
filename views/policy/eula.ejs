@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End User License Agreement (EULA) | OASIS</title>
+    <link rel="stylesheet" href="/css/privacy-policy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+        
+    <header>
+        <div id="hamburger">☰</div>
+        <h1>End User License Agreement (EULA)</h1>
+        <img src="/img/Favi.png" alt="Company Logo" class="logo">
+    </header>
+    <%- include('../components/policy/sidenav') %>
+    <main>
+        <section>
+            <p>This End User License Agreement ("EULA") is a legal agreement between you and [Your Company Name]. By installing, copying, or otherwise using the software, you agree to be bound by the terms of this EULA.</p>
+        </section>
+
+        <section>
+            <h2>1. Grant of License</h2>
+            <p>Klippefort grants you a non-exclusive, non-transferable license to use the software solely for personal or internal business purposes on the terms set forth herein.</p>
+        </section>
+
+        <section>
+            <h2>2. Restrictions</h2>
+            <p>You may not distribute, sell, or transmit the software, nor may you modify, tweak, or create derivative works based on the software without prior written consent from Klippefort-Digital.</p>
+        </section>
+
+        <section>
+            <h2>3. Copyright</h2>
+            <p>The software is protected by copyright law and international treaties. All rights not explicitly granted in this EULA are reserved by Klippefort-Digital.</p>
+        </section>
+
+        <section>
+            <h2>4. Termination</h2>
+            <p>This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice from Klippefort-Digital if you fail to comply with any of its terms and conditions. Upon termination, you must cease all use of the software and destroy all copies of the software in your possession.</p>
+        </section>
+
+        <section>
+            <h2>5. Warranty Disclaimers</h2>
+            <p>Klippefort-Digital expressly disclaims any warranty for the software. The software and any related documentation is provided "as is" without warranty of any kind, either express or implied, including, without limitation, the implied warranties or merchantability, fitness for a particular purpose, or noninfringement.</p>
+        </section>
+
+        <section>
+            <h2>6. Limitation of Liability</h2>
+            <p>In no event shall Klippefort-Digital be liable for any special, incidental, indirect, or consequential damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use the software, even if Klippefort-Digital has been advised of the possibility of such damages.</p>
+        </section>
+
+        <section>
+            <h2>7. Governing Law</h2>
+            <p>This EULA shall be governed by the laws of the jurisdiction in which Klippefort-Digital is headquartered, without regard to its conflict of laws rules.</p>
+        </section>
+
+        <section>
+            <h2>Contact Information</h2>
+            <p>If you have any questions about this EULA, or if you want to contact Klippefort-Digital for any reason, please direct all correspondence to: info@klippefort.com, or +91-9952120195.</p>
+        </section>
+    </main>
+    <%- include('../components/policy/footer') %>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var sideNav = document.getElementById('sideNav');
+    document.getElementById('hamburger').addEventListener('click', function() {
+        sideNav.classList.add('expanded');
+    });
+
+    document.getElementById('closeMenu').addEventListener('click', function() {
+        sideNav.classList.remove('expanded');
+    });
+});
+    </script>
+</html>

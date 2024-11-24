@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return & Refund Policy | OASIS</title>
+    <link rel="stylesheet" href="/css/privacy-policy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div id="hamburger">☰</div>
+        <h1>Return & Refund Policy</h1>
+        <img src="/img/Favi.png" alt="Company Logo" class="logo">
+    </header>
+    <%- include('../components/policy/sidenav') %>
+    <main>
+        <section>
+            <p>Your satisfaction is important to us. If you are not satisfied with your purchase, you may return it within 30 days of receipt.</p>
+        </section>
+
+        <section>
+            <h2>1. Eligibility for Returns</h2>
+            <p>Items must be unused, in original condition, and include all original packaging and accessories to be eligible for a return. Customized items are not eligible for returns unless defective upon receipt.</p>
+        </section>
+
+        <section>
+            <h2>2. Refund Process</h2>
+            <p>Refunds will be processed within 14 days after we receive your returned item. Refunds will be made to the original payment method used during purchase. Please note that credit card refunds may take up to one billing cycle to appear on your statement.</p>
+        </section>
+
+        <section>
+            <h2>3. Non-Returnable Items</h2>
+            <p>The following items cannot be returned: perishable goods, personalized items, gift cards, downloadable software products, and health and personal care items.</p>
+        </section>
+
+        <section>
+            <h2>4. Exchanges</h2>
+            <p>If you need to exchange an item for the same item in a different size or color, send us an email at info@klippefort.com and send your item to the return address listed on our website.</p>
+        </section>
+
+        <section>
+            <h2>5. Shipping Returns</h2>
+            <p>To return your product, you should mail your product to: Puthur, Trichy-620017. You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</p>
+        </section>
+
+        <section>
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about how to return your item to us, contact us at:<br>
+            Email: info@klippefort.com<br>
+            Phone: +91-9952120195</p>
+        </section>
+    </main>
+    <%- include('../components/policy/footer') %>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var sideNav = document.getElementById('sideNav');
+    document.getElementById('hamburger').addEventListener('click', function() {
+        sideNav.classList.add('expanded');
+    });
+
+    document.getElementById('closeMenu').addEventListener('click', function() {
+        sideNav.classList.remove('expanded');
+    });
+});
+    </script>
+</html>

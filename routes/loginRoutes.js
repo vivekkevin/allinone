@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
         // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(400).send('Invalid username or password.');
+            return res.status(400).render('error', { message: 'Invalid username or password.' });
         }
 
         // Check if password matches
@@ -224,6 +224,10 @@ router.get('/disclaimer', (req, res) => {
 
 router.get('/cookies-policy', (req, res) => {
     res.render('policy/cookies-policy');
+});
+
+router.get('/explore', (req, res) => {
+    res.render('explore/explore.ejs');
 });
 
 module.exports = router;

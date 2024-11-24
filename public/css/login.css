@@ -495,100 +495,168 @@ input:focus {
     }
 }
 
-/*chat*/
 
-/* Chat Button */
-.chat-button {
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    padding: 15px;
-    font-size: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-}
+        /* Chat Button */
+        .chat-button {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
 
-.chat-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
-}
+        .chat-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
 
-/* Chat Popup */
-.chat-popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-    flex-direction: column;
-    z-index: 1000;
-}
+        /* Chat Popup */
+        .chat-popup {
+            position: fixed;
+            padding: 0.1%;
+            bottom: 90px;
+            right: 20px;
+            width: 320px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
 
+        .chat-header {
+            background: linear-gradient(45deg, #6a11cb, #ae79fd);
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
 
-.chat-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .chat-header h4 {
+            margin: 0;
+        }
 
-.chat-header h4 {
-    margin: 0;
-}
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
 
-.close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
+        .chat-messages {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
 
-.chat-messages {
-    padding: 10px;
-    height: 200px;
-    overflow-y: auto;
-    background: #f9f9f9;
-    border-top: 1px solid #ddd;
-}
+        .chat-messages div {
+            margin-bottom: 20px;
+            padding: 8px;
+            background: #e9e9e9;
+            border-radius: 5px;
+        }
 
-.chat-messages div {
-    margin-bottom: 20px;
-    padding: 8px;
-    background: #e9e9e9;
-    border-radius: 5px;
-}
+        #chat-form {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between input and button */
+            margin: 0; /* Remove any extra margins */
+            padding: 0; /* Remove padding if needed */
+            width: 100%; /* Adjust width to fit the container */
+        }
+        
+        #chat-input {
+            flex: 1; /* Take up all available space in the container */
+            padding: 10px; /* Add padding inside the input for better usability */
+            border: 1px solid #ccc; /* Add a border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px; /* Adjust font size */
+            box-sizing: border-box; /* Ensure padding doesn't affect total width */
+        }
 
-.chat-form {
-    display: flex;
-    border-top: 1px solid #ddd;
-}
+        #chat-form button {
+            padding: 10px; /* Padding inside the button */
+            border: none; /* Remove border */
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text/icon color */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Change cursor to pointer */
+            font-size: 16px; /* Adjust icon size */
+            display: flex; /* Center the icon */
+            align-items: center; 
+            justify-content: center;
+        }
+        #chat-form button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        /* Input Styles */
+        #user-form input,
+        #user-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
 
-.chat-form input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    outline: none;
-}
+        .chat-form button i {
+            font-size: 16px;
+        }
 
-.chat-form button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+        #user-form button {
+            padding: 10px;
+            background: linear-gradient(45deg, #6a11cb, #ae79fd);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
+        #user-form button:hover {
+            background: #ae79fd;
+        }
+        #platform {
+            width: 60%; /* Full width */
+            max-width: 300px; /* Limit the max width */
+            padding: 10px; /* Add padding for better usability */
+            font-size: 14px; /* Set font size */
+            color: #333; /* Text color */
+            background-color: #fff; /* Background color */
+            border: 1px solid #ccc; /* Border styling */
+            border-radius: 4px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            appearance: none; /* Remove native arrow styling (for consistency) */
+            cursor: pointer; /* Change cursor to pointer */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+        
+        #platform:focus {
+            outline: none; /* Remove default outline */
+            border-color: #007bff; /* Highlight border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add focus shadow */
+        }
+        
+        #platform option {
+            font-size: 14px; /* Option font size */
+            color: #333; /* Option text color */
+        }
+        

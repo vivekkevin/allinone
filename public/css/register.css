@@ -3,11 +3,11 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('../img/desktop-background.png') no-repeat center center fixed;
+    background: url('../img/desktop-background_R.png') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     flex-direction: column;
-    color: #333;
+    color: #d6d6d6;
     min-height: 100vh;
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
@@ -50,7 +50,7 @@ body {
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(144, 144, 144, 0.16);
     width: 700px;
     padding: 20px;
     border-radius: 12px;
@@ -65,13 +65,13 @@ header h1 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #4a4a4a;
+    color: #dcdcdc;
     text-align: center;
 }
 
 header p {
     font-size: 16px;
-    color: #7a7a7a;
+    color: #cfcfcf;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -90,7 +90,7 @@ header p {
 label {
     font-size: 14px;
     font-weight: 600;
-    color: #5a5a5a;
+    color: #dedede;
     margin-bottom: 5px;
     display: block;
 }
@@ -145,7 +145,7 @@ footer {
 }
 
 footer a {
-    color: #6B58F3;
+    color: #b2a8ff;
     text-decoration: none;
     font-weight: bold;
 }

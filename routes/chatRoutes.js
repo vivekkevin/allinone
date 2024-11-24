@@ -279,4 +279,20 @@ router.post("/support-post", async (req, res) => {
   }
 });
 
+router.post('/chat/:chatId/deleteMessage', (req, res) => {
+    const { chatId } = req.params;
+    const { messageIndex } = req.body;
+
+    // Find the chat by ID
+    const chat = chatCollection.find((c) => c.id === chatId);
+
+    if (chat && chat.messages[messageIndex]) {
+        chat.messages.splice(messageIndex, 1); // Remove the message
+        res.status(200).json({ message: 'Message deleted successfully' });
+    } else {
+        res.status(404).json({ error: 'Message not found' });
+    }
+});
+
+
 module.exports = router;

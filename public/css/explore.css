@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('../img/desktop-background_R.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #d6d6d6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.header .logo img {
+    height: 50px;
+}
+
+.header .login-link a {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(to right, #F78DCD, #E9B1C8, #FDDEB5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.header .login-link a:hover {
+    text-decoration: underline;
+    filter: brightness(1.2);
+}
+
+/* Content and Form Container */
+.content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.form-container {
+    background: rgba(144, 144, 144, 0.16);
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14px);
+    text-align: left;
+    margin-left: 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #0056b3;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #b2a8ff;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+/* Tablet Screens */
+@media (max-width: 1024px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+    .header .logo img {
+        height: 40px;
+    }
+
+    .header .login-link a {
+        font-size: 12px;
+    }
+
+    .form-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .card h3 {
+        font-size: 16px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .card button {
+        font-size: 13px;
+        padding: 8px;
+    }
+}

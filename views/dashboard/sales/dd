@@ -1,0 +1,35 @@
+        <!-- Prospect Records -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header pb-1">
+              <h6 class="mb-0">Prospect Records</h6>
+            </div>
+            <div class="card-body p-3">
+              <table class="table table-sm table-bordered" style="font-size: x-small;">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Industry</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Deal Size</th>
+                    <th>Sales Stage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% prospects.forEach(prospect => { %>
+                    <tr>
+                      <td><%= prospect.name %></td>
+                      <td><%= prospect.contact %></td>
+                      <td><%= prospect.status %></td>
+                      <td><%= prospect.priority %></td>
+                      <td><%= prospect.dealSize %></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>

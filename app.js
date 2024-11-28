@@ -11,6 +11,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/loginRoutes');
 const homeRoutes = require('./routes/home');
 const chatRoutes = require('./routes/chatRoutes');
+const salesProspectRoutes = require('./routes/salesProspectRoutes');
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use(
 app.use('/', homeRoutes);
 app.use('/', authRoutes);
 app.use('/', chatRoutes);
+app.use('/', salesProspectRoutes);
 
 app.post("/chat", (req, res) => {
     console.log("Request received:", req.body);

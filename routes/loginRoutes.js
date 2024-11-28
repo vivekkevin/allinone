@@ -16,16 +16,15 @@ const transporter = nodemailer.createTransport({
 
 // Render the login page
 router.get('/login', (req, res) => {
-    if (req.session.otpCode) {
+    if (req.session.otpCode && req.session.tempUser) {
         // If an OTP is active, render the OTP validation form
-        res.render('login', { step: 2, username: req.session.tempUser.username });
+        res.render('login', { step: 2, username: req.session.tempUser.username, company: req.session.company});
     } else {
         // Otherwise, render the login form
         res.render('login', { step: 1 });
     }
 });
 
-// Handle user login (Step 1: Username & Password)
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -39,39 +38,44 @@ router.post('/login', async (req, res) => {
         // Check if password matches
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).send('Invalid username or password.');
+            return res.status(400).render('error', { message: 'Invalid username or password.' });
         }
 
         // Generate a 6-digit OTP
         const otpCode = Math.floor(100000 + Math.random() * 900000);
 
-        // Save OTP in session and associate it with the user
+        // Save OTP and user data in session
         req.session.otpCode = otpCode;
-        req.session.tempUser = { id: user._id, username: user.username, email: user.email };
+        req.session.tempUser = { id: user._id, username: user.username, email: user.email, company: user.company };
 
         // Send OTP to user's email
-        await transporter.sendMail({
-            from: 'info@klippefort.com',
-            to: user.email,
-            subject: 'Your OTP Code',
-            html: `<p>Your OTP code is:</p><h2>${otpCode}</h2><p>Please use this code to complete your login.</p>`,
-        });
+        try {
+            await transporter.sendMail({
+                from: 'info@klippefort.com',
+                to: user.email,
+                subject: 'Your OTP Code',
+                html: `<p>Your OTP code is:</p><h2>${otpCode}</h2><p>Please use this code to complete your login.</p>`,
+            });
+        } catch (emailError) {
+            console.error('Error sending OTP email:', emailError);
+            return res.status(500).render('error', { message: 'Failed to send OTP. Please try again later.' });
+        }
 
         // Render the OTP validation screen
-        res.render('login', { step: 2, username }); // Render with step 2
+        res.render('login', { step: 2, username: user.username, company: user.company });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).send('An error occurred. Please try again later.');
     }
 });
 
-// Handle validation code (Step 2: OTP Validation)
+// Route: POST /validate-code
 router.post('/validate-code', (req, res) => {
     const { code } = req.body;
 
     try {
         // Check if the OTP is correct
-        if (!req.session.otpCode) {
+        if (!req.session.otpCode || !req.session.tempUser) {
             return res.status(400).send('Session expired. Please log in again.');
         }
 
@@ -94,6 +98,7 @@ router.post('/validate-code', (req, res) => {
         res.status(500).send('An error occurred during validation. Please try again.');
     }
 });
+
 
 // Render the registration page
 router.get('/register', (req, res) => res.render('register'));

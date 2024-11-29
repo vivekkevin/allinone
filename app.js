@@ -12,6 +12,7 @@ const authRoutes = require('./routes/loginRoutes');
 const homeRoutes = require('./routes/home');
 const chatRoutes = require('./routes/chatRoutes');
 const salesProspectRoutes = require('./routes/salesProspectRoutes');
+const forgetRoutes = require('./routes/forgetRoutes');
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use('/', homeRoutes);
 app.use('/', authRoutes);
 app.use('/', chatRoutes);
 app.use('/', salesProspectRoutes);
+app.use('/', forgetRoutes);
 
 app.post("/chat", (req, res) => {
     console.log("Request received:", req.body);

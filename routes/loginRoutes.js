@@ -32,7 +32,12 @@ router.post('/login', async (req, res) => {
         // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(400).render('error', { message: 'Invalid username or password.' });
+            return res.status(400).render('error/user_error', { message: 'Invalid username or password.' });
+        }
+
+        // Check if the user is approved
+        if (user.status !== 'approved') {
+            return res.status(403).render('error/app_error', { message: 'Your account is not approved yet. Please wait for admin approval.' });
         }
 
         // Check if password matches

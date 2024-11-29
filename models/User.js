@@ -8,7 +8,9 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     company: { type: String, required: true },
     country: { type: String, required: true },
-    description: { type: String, default: '' } // Optional field
+    description: { type: String, default: '' }, // Optional field
+    resetPasswordToken: { type: String, default: null }, // Token for password reset
+    resetPasswordExpires: { type: Date, default: null }, // Token expiry timestamp
 });
 
 module.exports = mongoose.model('User', UserSchema);
